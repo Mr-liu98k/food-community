@@ -1,4 +1,4 @@
-# Food Community · 美食社区（毕设）
+# Food Community · 美食社区
 
 前后端分离的美食分享社区：菜谱发布/审核、楼中楼评论、收藏点赞、探店达人 + 预约双主体审核、
 AI 美食专家（SSE 流式）、WebSocket 一对一聊天、管理端 ECharts 数据看板。
