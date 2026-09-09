@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodcommunity.mapper.InteractionMapper">
+
+    <!-- 幂等：重复点赞/收藏靠唯一键 uk_recipe_user，INSERT IGNORE 不报错 -->
+    <insert id="insertLike">
+        INSERT IGNORE INTO recipe_like (recipe_id, user_id)
+        VALUES (#{recipeId}, #{userId})
+    </insert>
+
+    <delete id="deleteLike">
+        DELETE FROM recipe_like
+        WHERE recipe_id = #{recipeId} AND user_id = #{userId}
+    </delete>
+
+    <select id="countLike" resultType="int">
+        SELECT COUNT(*)
+        FROM recipe_like
+        WHERE recipe_id = #{recipeId} AND user_id = #{userId}
+    </select>
+
+    <insert id="insertFavorite">
+        INSERT IGNORE INTO favorite (recipe_id, user_id)
+        VALUES (#{recipeId}, #{userId})
+    </insert>
+
+    <delete id="deleteFavorite">
+        DELETE FROM favorite
+        WHERE recipe_id = #{recipeId} AND user_id = #{userId}
+    </delete>
+
+    <select id="countFavorite" resultType="int">
+        SELECT COUNT(*)
+        FROM favorite
+        WHERE recipe_id = #{recipeId} AND user_id = #{userId}
+    </select>
+
+    <select id="selectMyFavoritePage" resultType="com.foodcommunity.entity.Recipe">
+        SELECT r.id, r.user_id, r.category_id, r.title, r.cover, r.description,
+               r.views, r.likes_count, r.status, r.reject_reason, r.create_time, r.update_time,
+               c.name AS category_name,
+               u.nickname AS author_nickname,
+               u.avatar AS author_avatar
+        FROM favorite f
+        JOIN recipe r ON f.recipe_id = r.id
+        JOIN category c ON r.category_id = c.id
+        JOIN `user` u ON r.user_id = u.id
+        WHERE f.user_id = #{userId}
+        ORDER BY f.id DESC
+    </select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodcommunity.mapper.CategoryMapper">
+
+    <!-- 依赖 map-underscore-to-camel-case 自动驼峰映射 -->
+    <select id="selectList" resultType="com.foodcommunity.entity.Category">
+        SELECT id, name, sort, create_time
+        FROM category
+        <where>
+            <if test="name != null and name != ''">
+                name LIKE CONCAT('%', #{name}, '%')
+            </if>
+        </where>
+        ORDER BY sort ASC, id ASC
+    </select>
+
+    <select id="selectById" resultType="com.foodcommunity.entity.Category">
+        SELECT id, name, sort, create_time
+        FROM category
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByName" resultType="com.foodcommunity.entity.Category">
+        SELECT id, name, sort, create_time
+        FROM category
+        WHERE name = #{name}
+        LIMIT 1
+    </select>
+
+    <insert id="insert" parameterType="com.foodcommunity.entity.Category" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO category (name, sort)
+        VALUES (#{name}, #{sort})
+    </insert>
+
+    <update id="update" parameterType="com.foodcommunity.entity.Category">
+        UPDATE category
+        SET name = #{name},
+            sort = #{sort}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM category
+        WHERE id = #{id}
+    </delete>
+</mapper>

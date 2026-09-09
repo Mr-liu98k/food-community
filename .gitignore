@@ -1,0 +1,4 @@
+# 本地运行时产物与隐私（backend 自身已 ignore .env/target，这里兜底）
+backend/uploads/
+.DS_Store
+*.log

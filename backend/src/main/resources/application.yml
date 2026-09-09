@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: food-community
+  datasource:
+    # createDatabaseIfNotExist：库不存在时自动创建（表结构请用 sql/01_schema.sql 初始化一次）
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:food_community}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    time-zone: Asia/Shanghai
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+  # AI 美食专家：走 OpenAI 兼容端点接入阿里云百炼（DashScope）
+  # Key 优先取系统环境变量 ALIYUN_MAAS_API_KEY，也可在 .env 设 DASHSCOPE_API_KEY
+  # 未配置 Key 时后端照常启动，仅 AI 接口返回提示
+  ai:
+    openai:
+      # Spring AI 会自动拼接 /v1/chat/completions，此处 base-url 不要带 /v1
+      base-url: ${AI_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode}
+      api-key: ${ALIYUN_MAAS_API_KEY:${DASHSCOPE_API_KEY:}}
+      chat:
+        options:
+          model: ${AI_MODEL:qwen-plus}
+          temperature: 0.7
+
+# 本地上传目录（相对后端启动目录，如 backend/uploads；已做 /uploads/** 静态映射）
+upload:
+  dir: ./uploads
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.foodcommunity.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+# PageHelper 分页：MySQL 方言，页码越界自动矫正到边界
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+
+# JWT 配置（secret 来自 .env，必须 ≥32 字符）
+jwt:
+  secret: ${JWT_SECRET:}
+  expire-hours: 24
+
+# 启动自动创建的管理员（来自 .env）
+admin:
+  username: ${ADMIN_USERNAME:admin}
+  password: ${ADMIN_PASSWORD:admin123}
+
+logging:
+  level:
+    com.foodcommunity: info

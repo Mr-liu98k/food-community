@@ -1,0 +1,71 @@
+/* ============================================================
+   全局设计变量（M1 起由 hallmark 规范驱动：OKLCH 暖橙系）
+   - paper/ink 都带色相偏移，拒绝纯白纯黑
+   - 单 accent（食物橙），中性色全部偏暖
+   - display(衬线) + body(无衬线) 双字体
+   ============================================================ */
+:root {
+  --fc-accent: #e8590c;
+  --fc-accent-soft: #ffe8d9;
+
+  /* OKLCH 暖调层（anchor hue ≈ 55，暖橙） */
+  --fc-paper: oklch(97% 0.012 70);
+  --fc-surface: oklch(94% 0.014 70);
+  --fc-rule: oklch(86% 0.012 70);
+  --fc-neutral: oklch(52% 0.016 60);
+  --fc-muted: oklch(38% 0.018 55);
+  --fc-ink: oklch(21% 0.022 55);
+
+  /* 双字体：标题衬线，正文无衬线 */
+  --fc-font-display: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+  --fc-font-body: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+
+  /* Element-Plus 主色覆盖为食物橙 */
+  --el-color-primary: #e8590c;
+  --el-color-primary-light-3: #f08c50;
+  --el-color-primary-light-5: #f6b189;
+  --el-color-primary-light-7: #fad4bd;
+  --el-color-primary-light-9: #fdeee4;
+  --el-color-primary-dark-2: #c7470a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fc-font-body);
+  color: var(--fc-ink);
+  background: var(--fc-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fc-font-display);
+}
+
+/* 列表项 hover 反馈 */
+.card-link {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(232, 89, 12, 0.12);
+}

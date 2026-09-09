@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodcommunity.mapper.ExpertMapper">
+
+    <!-- 达人榜热度：SUM(通过探店 views) * 2。LEFT JOIN 保证无探店达人也上榜（热度 0）。 -->
+    <select id="selectRank" resultType="com.foodcommunity.dto.ExpertVO">
+        SELECT u.id,
+               u.nickname,
+               u.avatar,
+               u.intro,
+               COALESCE(SUM(sv.views), 0) * 2 AS heat,
+               u.create_time
+        FROM `user` u
+        LEFT JOIN store_visit sv ON sv.user_id = u.id AND sv.status = 1
+        WHERE u.role = 0
+          AND u.is_expert = 1
+        GROUP BY u.id, u.nickname, u.avatar, u.intro, u.create_time
+        ORDER BY heat DESC, u.id ASC
+        <if test="limit != null">
+            LIMIT #{limit}
+        </if>
+    </select>
+
+    <select id="countExpert" resultType="int">
+        SELECT COUNT(*)
+        FROM `user`
+        WHERE id = #{id}
+          AND role = 0
+          AND is_expert = 1
+    </select>
+</mapper>

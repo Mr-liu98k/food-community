@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodcommunity.mapper.RecipeMapper">
+
+    <!-- 列表/详情公共列：联表带出作者昵称、头像与分类名 -->
+    <sql id="Detail_Columns">
+        r.id, r.user_id, r.category_id, r.title, r.cover, r.description,
+        r.views, r.likes_count, r.status, r.reject_reason, r.create_time, r.update_time,
+        c.name  AS category_name,
+        u.nickname AS author_nickname,
+        u.avatar   AS author_avatar
+    </sql>
+
+    <select id="countByCategory" resultType="long">
+        SELECT COUNT(*)
+        FROM recipe
+        WHERE category_id = #{categoryId}
+    </select>
+
+    <select id="countApprovedByUser" resultType="long">
+        SELECT COUNT(*)
+        FROM recipe
+        WHERE user_id = #{userId} AND status = 1
+    </select>
+
+    <select id="countByUser" resultType="long">
+        SELECT COUNT(*)
+        FROM recipe
+        WHERE user_id = #{userId}
+    </select>
+
+    <update id="updateLikes">
+        UPDATE recipe
+        SET likes_count = likes_count + #{delta}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectByQuery" resultType="com.foodcommunity.entity.Recipe">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM recipe r
+        JOIN category c ON r.category_id = c.id
+        JOIN `user` u ON r.user_id = u.id
+        <where>
+            <if test="q.status != null">AND r.status = #{q.status}</if>
+            <if test="q.categoryId != null">AND r.category_id = #{q.categoryId}</if>
+            <if test="q.userId != null">AND r.user_id = #{q.userId}</if>
+            <if test="q.keyword != null and q.keyword != ''">
+                AND r.title LIKE CONCAT('%', #{q.keyword}, '%')
+            </if>
+        </where>
+        ORDER BY r.id DESC
+    </select>
+
+    <select id="selectHot" resultType="com.foodcommunity.entity.Recipe">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM recipe r
+        JOIN category c ON r.category_id = c.id
+        JOIN `user` u ON r.user_id = u.id
+        WHERE r.status = 1
+        ORDER BY r.views DESC, r.id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectDetail" resultType="com.foodcommunity.entity.Recipe">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM recipe r
+        JOIN category c ON r.category_id = c.id
+        JOIN `user` u ON r.user_id = u.id
+        WHERE r.id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.foodcommunity.entity.Recipe" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO recipe (user_id, category_id, title, cover, description, views, likes_count, status, reject_reason)
+        VALUES (#{userId}, #{categoryId}, #{title}, #{cover}, #{description}, 0, 0, #{status}, #{rejectReason})
+    </insert>
+
+    <!-- 编辑：只更新内容类字段，浏览量/点赞数保留，审核状态由 Service 重置 -->
+    <update id="updateContent" parameterType="com.foodcommunity.entity.Recipe">
+        UPDATE recipe
+        SET category_id = #{categoryId},
+            title       = #{title},
+            cover       = #{cover},
+            description = #{description},
+            status      = #{status},
+            reject_reason = #{rejectReason}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateViews">
+        UPDATE recipe
+        SET views = views + 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateAudit">
+        UPDATE recipe
+        SET status        = #{status},
+            reject_reason = #{reason}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM recipe
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 从表 -->
+    <select id="selectIngredients" resultType="com.foodcommunity.entity.RecipeIngredient">
+        SELECT id, recipe_id, name, amount, sort
+        FROM recipe_ingredient
+        WHERE recipe_id = #{recipeId}
+        ORDER BY sort ASC, id ASC
+    </select>
+
+    <select id="selectSteps" resultType="com.foodcommunity.entity.RecipeStep">
+        SELECT id, recipe_id, content, sort
+        FROM recipe_step
+        WHERE recipe_id = #{recipeId}
+        ORDER BY sort ASC, id ASC
+    </select>
+
+    <insert id="insertIngredients">
+        INSERT INTO recipe_ingredient (recipe_id, name, amount, sort)
+        VALUES
+        <foreach collection="list" item="it" separator=",">
+            (#{it.recipeId}, #{it.name}, #{it.amount}, #{it.sort})
+        </foreach>
+    </insert>
+
+    <insert id="insertSteps">
+        INSERT INTO recipe_step (recipe_id, content, sort)
+        VALUES
+        <foreach collection="list" item="it" separator=",">
+            (#{it.recipeId}, #{it.content}, #{it.sort})
+        </foreach>
+    </insert>
+
+    <delete id="deleteIngredients">
+        DELETE FROM recipe_ingredient
+        WHERE recipe_id = #{recipeId}
+    </delete>
+
+    <delete id="deleteSteps">
+        DELETE FROM recipe_step
+        WHERE recipe_id = #{recipeId}
+    </delete>
+
+    <!-- 互动级联清理 -->
+    <delete id="deleteLikes">
+        DELETE FROM recipe_like
+        WHERE recipe_id = #{recipeId}
+    </delete>
+
+    <delete id="deleteFavorites">
+        DELETE FROM favorite
+        WHERE recipe_id = #{recipeId}
+    </delete>
+
+    <delete id="deleteComments">
+        DELETE FROM `comment`
+        WHERE recipe_id = #{recipeId}
+    </delete>
+</mapper>

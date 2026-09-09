@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodcommunity.mapper.BannerMapper">
+
+    <select id="selectAdminPage" resultType="com.foodcommunity.entity.Banner">
+        SELECT b.id, b.recipe_id, b.image, b.sort, b.create_time,
+               r.title AS recipe_title
+        FROM banner b
+        JOIN recipe r ON b.recipe_id = r.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                r.title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY b.sort ASC, b.id ASC
+    </select>
+
+    <select id="selectFrontList" resultType="com.foodcommunity.entity.Banner">
+        SELECT b.id, b.recipe_id, b.image, b.sort, b.create_time,
+               r.title AS recipe_title
+        FROM banner b
+        JOIN recipe r ON b.recipe_id = r.id AND r.status = 1
+        ORDER BY b.sort ASC, b.id ASC
+    </select>
+
+    <select id="selectById" resultType="com.foodcommunity.entity.Banner">
+        SELECT id, recipe_id, image, sort, create_time
+        FROM banner
+        WHERE id = #{id}
+    </select>
+
+    <select id="countByRecipe" resultType="long">
+        SELECT COUNT(*)
+        FROM banner
+        WHERE recipe_id = #{recipeId}
+    </select>
+
+    <insert id="insert" parameterType="com.foodcommunity.entity.Banner" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO banner (recipe_id, image, sort)
+        VALUES (#{recipeId}, #{image}, #{sort})
+    </insert>
+
+    <update id="update" parameterType="com.foodcommunity.entity.Banner">
+        UPDATE banner
+        SET recipe_id = #{recipeId},
+            image     = #{image},
+            sort      = #{sort}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM banner
+        WHERE id = #{id}
+    </delete>
+</mapper>

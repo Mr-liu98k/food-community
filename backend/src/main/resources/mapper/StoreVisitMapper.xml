@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodcommunity.mapper.StoreVisitMapper">
+
+    <sql id="Detail_Columns">
+        sv.id, sv.user_id, sv.title, sv.cover, sv.content, sv.address,
+        sv.views, sv.status, sv.reject_reason, sv.create_time, sv.update_time,
+        u.nickname AS author_nickname,
+        u.avatar   AS author_avatar
+    </sql>
+
+    <select id="selectByQuery" resultType="com.foodcommunity.entity.StoreVisit">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM store_visit sv
+        JOIN `user` u ON sv.user_id = u.id
+        <where>
+            <if test="q.status != null">AND sv.status = #{q.status}</if>
+            <if test="q.userId != null">AND sv.user_id = #{q.userId}</if>
+            <if test="q.keyword != null and q.keyword != ''">
+                AND sv.title LIKE CONCAT('%', #{q.keyword}, '%')
+            </if>
+        </where>
+        ORDER BY sv.id DESC
+    </select>
+
+    <select id="selectHot" resultType="com.foodcommunity.entity.StoreVisit">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM store_visit sv
+        JOIN `user` u ON sv.user_id = u.id
+        WHERE sv.status = 1
+        ORDER BY sv.views DESC, sv.id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectDetail" resultType="com.foodcommunity.entity.StoreVisit">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM store_visit sv
+        JOIN `user` u ON sv.user_id = u.id
+        WHERE sv.id = #{id}
+    </select>
+
+    <select id="countApprovedByUser" resultType="long">
+        SELECT COUNT(*)
+        FROM store_visit
+        WHERE user_id = #{userId} AND status = 1
+    </select>
+
+    <select id="countByUser" resultType="long">
+        SELECT COUNT(*)
+        FROM store_visit
+        WHERE user_id = #{userId}
+    </select>
+
+    <insert id="insert" parameterType="com.foodcommunity.entity.StoreVisit" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO store_visit (user_id, title, cover, content, address, views, status, reject_reason)
+        VALUES (#{userId}, #{title}, #{cover}, #{content}, #{address}, 0, #{status}, #{rejectReason})
+    </insert>
+
+    <update id="updateContent" parameterType="com.foodcommunity.entity.StoreVisit">
+        UPDATE store_visit
+        SET title         = #{title},
+            cover         = #{cover},
+            content       = #{content},
+            address       = #{address},
+            status        = #{status},
+            reject_reason = #{rejectReason}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateViews">
+        UPDATE store_visit
+        SET views = views + 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateAudit">
+        UPDATE store_visit
+        SET status        = #{status},
+            reject_reason = #{reason}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM store_visit
+        WHERE id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodcommunity.mapper.ReservationMapper">
+
+    <sql id="Detail_Columns">
+        rv.id, rv.initiator_id, rv.expert_id, rv.store_name, rv.store_intro, rv.store_address,
+        rv.phone, rv.remark, rv.status, rv.reject_reason, rv.create_time, rv.update_time,
+        iu.nickname AS initiator_nickname,
+        iu.avatar   AS initiator_avatar,
+        eu.nickname AS expert_nickname,
+        eu.avatar   AS expert_avatar
+    </sql>
+
+    <insert id="insert" parameterType="com.foodcommunity.entity.Reservation" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO reservation (initiator_id, expert_id, store_name, store_intro, store_address,
+                                 phone, remark, status, reject_reason)
+        VALUES (#{initiatorId}, #{expertId}, #{storeName}, #{storeIntro}, #{storeAddress},
+                #{phone}, #{remark}, 0, NULL)
+    </insert>
+
+    <select id="selectMyList" resultType="com.foodcommunity.entity.Reservation">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM reservation rv
+        JOIN `user` iu ON rv.initiator_id = iu.id
+        JOIN `user` eu ON rv.expert_id = eu.id
+        WHERE (#{initiatorId} IS NOT NULL AND rv.initiator_id = #{initiatorId})
+           OR (#{expertId} IS NOT NULL AND rv.expert_id = #{expertId})
+        ORDER BY rv.id DESC
+    </select>
+
+    <select id="selectDetail" resultType="com.foodcommunity.entity.Reservation">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM reservation rv
+        JOIN `user` iu ON rv.initiator_id = iu.id
+        JOIN `user` eu ON rv.expert_id = eu.id
+        WHERE rv.id = #{id}
+    </select>
+
+    <select id="selectAdminPage" resultType="com.foodcommunity.entity.Reservation">
+        SELECT
+        <include refid="Detail_Columns"/>
+        FROM reservation rv
+        JOIN `user` iu ON rv.initiator_id = iu.id
+        JOIN `user` eu ON rv.expert_id = eu.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (rv.store_name LIKE CONCAT('%', #{keyword}, '%')
+                 OR rv.phone LIKE CONCAT('%', #{keyword}, '%')
+                 OR iu.nickname LIKE CONCAT('%', #{keyword}, '%')
+                 OR eu.nickname LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+        ORDER BY rv.id DESC
+    </select>
+
+    <update id="updateStatus">
+        UPDATE reservation
+        SET status        = #{status},
+            reject_reason = #{reason}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM reservation
+        WHERE id = #{id}
+    </delete>
+
+    <select id="countByParticipant" resultType="long">
+        SELECT COUNT(*)
+        FROM reservation
+        WHERE initiator_id = #{userId} OR expert_id = #{userId}
+    </select>
+</mapper>
