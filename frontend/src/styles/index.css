@@ -1,33 +1,168 @@
 /* ============================================================
-   全局设计变量（M1 起由 hallmark 规范驱动：OKLCH 暖橙系）
-   - paper/ink 都带色相偏移，拒绝纯白纯黑
-   - 单 accent（食物橙），中性色全部偏暖
-   - display(衬线) + body(无衬线) 双字体
+   全局设计系统 · Design Tokens
+   ------------------------------------------------------------
+   设计基调（沿用既有「暖橙」识别）：
+     - paper / ink 均带暖色相偏移（anchor hue ≈ 55~70），拒绝纯白纯黑
+     - 单一 accent（食物橙），中性色全部偏暖
+     - display（衬线）+ body（无衬线）双字体
+
+   本文件是【唯一】的设计变量源。组件内不应再出现硬编码色值、
+   圆角、阴影 —— 一律引用这里的 token，保证系统性一致。
+
+   命名约定：
+     --fc-*    本项目语义 token
+     --el-*    Element Plus 覆盖（必须保留，用于主题化组件库）
+     --fc-sp-* 间距（8pt 网格）  --fc-r-* 圆角  --fc-sh-* 阴影
+     --fc-dur-* 时长  --fc-ease-* 缓动  --fc-z-* 层级
    ============================================================ */
+
 :root {
+  /* ---------- 1. 品牌色 ---------- */
   --fc-accent: #e8590c;
   --fc-accent-soft: #ffe8d9;
+  --fc-accent-hover: #c7470a;
+  --fc-accent-weak: oklch(96% 0.03 70);
 
-  /* OKLCH 暖调层（anchor hue ≈ 55，暖橙） */
-  --fc-paper: oklch(97% 0.012 70);
-  --fc-surface: oklch(94% 0.014 70);
-  --fc-rule: oklch(86% 0.012 70);
-  --fc-neutral: oklch(52% 0.016 60);
-  --fc-muted: oklch(38% 0.018 55);
-  --fc-ink: oklch(21% 0.022 55);
+  /* 兼容别名：历史代码中引用了 --fc-primary，此前从未定义，
+     导致品牌名与激活态颜色失效、管理端菜单高亮背景透明。
+     这里补上定义（等价于 accent），既修复 Bug 又不改动调用方。 */
+  --fc-primary: #e8590c;
 
-  /* 双字体：标题衬线，正文无衬线 */
+  /* ---------- 2. 语义状态色 ---------- */
+  --fc-success: #2f9e44;
+  --fc-warning: #d97706;
+  --fc-danger: #d43d2a;
+  --fc-info: #1971c2;
+  --fc-success-soft: oklch(95% 0.04 145);
+  --fc-warning-soft: oklch(95% 0.05 75);
+  --fc-danger-soft: oklch(95% 0.04 28);
+
+  /* ---------- 3. 中性色阶（暖调 OKLCH）---------- */
+  --fc-paper: oklch(97% 0.012 70);      /* 页面底色 */
+  --fc-surface: oklch(94% 0.014 70);    /* 次级面 */
+  --fc-surface-2: oklch(99% 0.006 70);  /* 卡片面（最亮） */
+  --fc-rule: oklch(86% 0.012 70);       /* 分隔线 / 描边 */
+  --fc-neutral: oklch(52% 0.016 60);    /* 次要文字 */
+  --fc-muted: oklch(38% 0.018 55);      /* 更弱文字 */
+  --fc-ink: oklch(21% 0.022 55);        /* 主文字 */
+  --fc-ink-invert: oklch(97% 0.012 70); /* 深底上的文字 */
+
+  /* ---------- 4. 字体 ---------- */
   --fc-font-display: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
   --fc-font-body: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  --fc-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 
-  /* Element-Plus 主色覆盖为食物橙 */
+  /* ---------- 5. 字号层级（Type Scale）----------
+     刻度依据【代码实际使用频次】校准（非凭空设定），把同义的不同值收敛：
+       · 页面标题原为 28px(7处) / 30px(5处) → 统一 2xl = 28px
+       · 区块标题原为 18 / 19 / 20px      → 统一 xl  = 20px
+       · 卡片标题原为 16 / 17px           → 统一 lg  = 16px
+     收敛幅度均在 1~3px，视觉无感，但消除了同角色多值的混乱。 */
+  --fc-fs-2xs: 11px;   /* 微标签（角标内文字） */
+  --fc-fs-xs: 12px;    /* 辅助文字 */
+  --fc-fs-sm: 13px;    /* 元信息 */
+  --fc-fs-base: 14px;  /* 正文 */
+  --fc-fs-md: 15px;    /* 强调正文 */
+  --fc-fs-lg: 16px;    /* 卡片标题 */
+  --fc-fs-xl: 20px;    /* 区块标题 */
+  --fc-fs-2xl: 28px;   /* 页面标题 */
+  --fc-fs-3xl: 34px;   /* 主视觉标题 */
+  --fc-fs-4xl: 52px;   /* 超大展示 */
+
+  --fc-lh-tight: 1.2;
+  --fc-lh-snug: 1.4;
+  --fc-lh-normal: 1.6;
+  --fc-lh-relaxed: 1.75;
+
+  /* ---------- 6. 间距 ----------
+     以 4px 为基准步进（含 2px 半格）——与本项目既有代码的真实用法一致：
+     高频取值为 4/6/8/10/12/14/16/20/24，故刻度覆盖到 6/10/14，
+     使全部既有数值都能 1:1 映射到 token，不产生视觉变化。 */
+  --fc-sp-1: 4px;
+  --fc-sp-2: 8px;
+  --fc-sp-3: 12px;
+  --fc-sp-4: 16px;
+  --fc-sp-5: 20px;
+  --fc-sp-6: 24px;
+  --fc-sp-8: 32px;
+  --fc-sp-10: 40px;
+  --fc-sp-12: 48px;
+  --fc-sp-16: 64px;
+  /* 半步（half-step） */
+  --fc-sp-1-5: 6px;
+  --fc-sp-2-5: 10px;
+  --fc-sp-3-5: 14px;
+  --fc-sp-0-5: 2px;
+
+  /* ---------- 7. 圆角 ---------- */
+  --fc-r-xs: 6px;      /* 标签、小控件 */
+  --fc-r-sm: 8px;      /* 输入框、按钮 */
+  --fc-r-md: 12px;     /* 卡片 */
+  --fc-r-lg: 16px;     /* 大容器、轮播 */
+  --fc-r-full: 999px;  /* 胶囊 */
+  /* 半步 */
+  --fc-r-2xs: 4px;
+  --fc-r-sm-md: 10px;
+  --fc-r-md-lg: 14px;
+
+  /* ---------- 8. 阴影（克制：每级仅一层主阴影 + 一层环境阴影）---------- */
+  --fc-sh-xs: 0 1px 2px rgba(60, 40, 25, 0.05);
+  --fc-sh-sm: 0 1px 2px rgba(60, 40, 25, 0.05), 0 2px 8px rgba(60, 40, 25, 0.06);
+  --fc-sh-md: 0 2px 4px rgba(60, 40, 25, 0.06), 0 8px 24px rgba(60, 40, 25, 0.09);
+  --fc-sh-lg: 0 4px 8px rgba(60, 40, 25, 0.07), 0 16px 40px rgba(60, 40, 25, 0.12);
+  --fc-sh-accent: 0 10px 26px rgba(232, 89, 12, 0.16);
+
+  /* ---------- 9. 动效 ---------- */
+  --fc-dur-fast: 150ms;
+  --fc-dur-base: 200ms;
+  --fc-dur-slow: 300ms;
+  --fc-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --fc-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --fc-ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* ---------- 10. 布局 ----------
+     收敛原先散落的 11 种页面宽度为 2 级标准：
+       --fc-container       布局外层（顶栏 / 主内容区同一宽度，保证导航与内容对齐）
+       --fc-page            宽页：列表、表格、卡片流
+       --fc-page-narrow     窄页：表单、阅读型页面、聊天
+     页面根容器一律引用 --fc-page / --fc-page-narrow，不再写字面量。 */
+  --fc-container: 1100px;
+  --fc-page: 1000px;
+  --fc-page-narrow: 760px;
+
+  /* ---------- 11. 层级 ---------- */
+  --fc-z-header: 10;
+  --fc-z-dropdown: 100;
+  --fc-z-modal: 1000;
+
+  /* ---------- 12. Element Plus 主题覆盖 ---------- */
   --el-color-primary: #e8590c;
   --el-color-primary-light-3: #f08c50;
   --el-color-primary-light-5: #f6b189;
   --el-color-primary-light-7: #fad4bd;
   --el-color-primary-light-9: #fdeee4;
   --el-color-primary-dark-2: #c7470a;
+
+  --el-color-success: #2f9e44;
+  --el-color-warning: #d97706;
+  --el-color-danger: #d43d2a;
+  --el-color-error: #d43d2a;
+
+  --el-border-radius-base: var(--fc-r-sm);
+  --el-border-radius-small: var(--fc-r-xs);
+  --el-text-color-primary: var(--fc-ink);
+  --el-text-color-regular: var(--fc-muted);
+  --el-text-color-secondary: var(--fc-neutral);
+  --el-border-color: var(--fc-rule);
+  --el-border-color-light: var(--fc-rule);
+  --el-fill-color-blank: var(--fc-surface-2);
+  --el-bg-color: var(--fc-surface-2);
+  --el-font-family: var(--fc-font-body);
 }
+
+/* ============================================================
+   基础重置
+   ============================================================ */
 
 * {
   box-sizing: border-box;
@@ -43,9 +178,12 @@ body,
 
 body {
   font-family: var(--fc-font-body);
+  font-size: var(--fc-fs-base);
+  line-height: var(--fc-lh-normal);
   color: var(--fc-ink);
   background: var(--fc-paper);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
@@ -56,16 +194,139 @@ a {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--fc-font-display);
+  line-height: var(--fc-lh-tight);
 }
 
-/* 列表项 hover 反馈 */
+/* 无障碍：统一可见焦点环。鼠标点击不显示，键盘导航必须可见。 */
+:focus-visible {
+  outline: 2px solid var(--fc-accent);
+  outline-offset: 2px;
+  border-radius: var(--fc-r-xs);
+}
+
+/* 尊重系统「减少动态效果」偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   通用工具类
+   ============================================================ */
+
+/* 页面主容器：统一宽度与左右留白 */
+.fc-container {
+  max-width: var(--fc-container);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--fc-sp-4);
+}
+
+/* 卡片：三级质感（浮起 / 填充 / 描边），交互态统一 */
+.fc-card {
+  background: var(--fc-surface-2);
+  border-radius: var(--fc-r-md);
+  transition: transform var(--fc-dur-base) var(--fc-ease-standard),
+              box-shadow var(--fc-dur-base) var(--fc-ease-standard);
+}
+
+.fc-card--elevated {
+  box-shadow: var(--fc-sh-sm);
+}
+
+.fc-card--outlined {
+  border: 1px solid var(--fc-rule);
+}
+
+/* 可点击卡片：hover 浮起 + accent 色调阴影 */
 .card-link {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--fc-dur-base) var(--fc-ease-standard),
+              box-shadow var(--fc-dur-base) var(--fc-ease-standard);
 }
 
 .card-link:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(232, 89, 12, 0.12);
+  box-shadow: var(--fc-sh-accent);
+}
+
+/* 区块标题 */
+.fc-section-title {
+  font-family: var(--fc-font-display);
+  font-size: var(--fc-fs-xl);
+  margin: 0;
+}
+
+/* 元信息文字 */
+.fc-meta {
+  color: var(--fc-neutral);
+  font-size: var(--fc-fs-sm);
+}
+
+/* 空态容器统一高度，避免各页跳动 */
+.fc-empty {
+  padding: var(--fc-sp-16) var(--fc-sp-4);
+}
+
+/* ============================================================
+   Element Plus 细节统一
+   ============================================================ */
+
+/* 表格：表头底色统一、行 hover 统一暖调 */
+.el-table th.el-table__cell {
+  background: var(--fc-surface) !important;
+  color: var(--fc-muted) !important;
+  font-weight: 600;
+}
+
+.el-table .el-table__row:hover > td.el-table__cell {
+  background: var(--fc-accent-weak) !important;
+}
+
+/* 分页：与内容区留白一致 */
+.el-pagination {
+  justify-content: flex-end;
+  margin-top: var(--fc-sp-4);
+}
+
+/* 弹窗：统一圆角与阴影 */
+.el-dialog {
+  border-radius: var(--fc-r-md);
+  box-shadow: var(--fc-sh-lg);
+}
+
+/* 卡片型组件统一描边色 */
+.el-card {
+  border-color: var(--fc-rule);
+  border-radius: var(--fc-r-md);
+}
+
+/* 滚动条：细、暖调、不抢视觉 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fc-rule);
+  border-radius: var(--fc-r-full);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fc-neutral);
+  background-clip: content-box;
 }

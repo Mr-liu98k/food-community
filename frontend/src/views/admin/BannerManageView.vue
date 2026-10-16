@@ -126,24 +126,24 @@ onMounted(() => load(1))
 .toolbar {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 14px;
+  margin-bottom: var(--fc-sp-3-5);
 }
 
 .thumb {
   width: 120px;
   height: 52px;
-  border-radius: 6px;
+  border-radius: var(--fc-r-xs);
   overflow: hidden;
 }
 
 .pager {
-  margin-top: 16px;
+  margin-top: var(--fc-sp-4);
   justify-content: flex-end;
 }
 
 .hint {
-  margin-left: 10px;
-  color: #999;
-  font-size: 12px;
+  margin-left: var(--fc-sp-2-5);
+  color: var(--fc-neutral);
+  font-size: var(--fc-fs-xs);
 }
 </style>

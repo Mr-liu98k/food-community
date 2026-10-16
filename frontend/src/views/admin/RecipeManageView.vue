@@ -182,8 +182,8 @@ onMounted(async () => {
 <style scoped>
 .toolbar {
   display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: var(--fc-sp-2-5);
+  margin-bottom: var(--fc-sp-3-5);
 }
 
 .search { width: 240px; }
@@ -192,58 +192,58 @@ onMounted(async () => {
 .t-title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .mini-cover {
   width: 52px;
   height: 38px;
-  border-radius: 6px;
+  border-radius: var(--fc-r-xs);
   overflow: hidden;
   flex-shrink: 0;
 }
 
 .pager {
-  margin-top: 16px;
+  margin-top: var(--fc-sp-4);
   justify-content: flex-end;
 }
 
 .pv-cover {
   height: 200px;
-  border-radius: 10px;
+  border-radius: var(--fc-r-sm-md);
   overflow: hidden;
 }
 
 .pv-title {
-  margin: 14px 0 6px;
+  margin: var(--fc-sp-3-5) 0 var(--fc-sp-1-5);
 }
 
 .pv-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  color: #777;
-  font-size: 13px;
-  margin-bottom: 12px;
+  gap: var(--fc-sp-3-5);
+  color: var(--fc-neutral);
+  font-size: var(--fc-fs-sm);
+  margin-bottom: var(--fc-sp-3);
 }
 
 .mb {
-  margin-bottom: 12px;
+  margin-bottom: var(--fc-sp-3);
 }
 
 .pv-sec h3 {
-  font-size: 16px;
-  margin: 14px 0 8px;
+  font-size: var(--fc-fs-lg);
+  margin: var(--fc-sp-3-5) 0 var(--fc-sp-2);
 }
 
 .pv-ings {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 4px 24px;
+  gap: var(--fc-sp-1) var(--fc-sp-6);
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
 }
 
 .pv-ings b {

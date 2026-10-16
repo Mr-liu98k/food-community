@@ -205,7 +205,7 @@ onMounted(async () => {
 
 <style scoped>
 .profile-page {
-  max-width: 920px;
+  max-width: var(--fc-page);
   margin: 0 auto;
 }
 
@@ -214,7 +214,7 @@ onMounted(async () => {
   gap: 22px;
   align-items: center;
   background: var(--fc-surface);
-  border-radius: 16px;
+  border-radius: var(--fc-r-lg);
   padding: 28px 30px;
   margin-bottom: 22px;
   flex-wrap: wrap;
@@ -228,41 +228,41 @@ onMounted(async () => {
 .name-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .name-row h1 {
   margin: 0;
-  font-size: 26px;
+  font-size: var(--fc-fs-2xl);
 }
 
 .intro {
   color: var(--fc-neutral);
-  margin: 8px 0 4px;
-  font-size: 14px;
+  margin: var(--fc-sp-2) 0 var(--fc-sp-1);
+  font-size: var(--fc-fs-base);
 }
 
 .meta {
   color: var(--fc-muted);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
   margin: 0;
 }
 
 .head-actions {
   display: flex;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: var(--fc-sp-2);
+  margin-bottom: var(--fc-sp-4);
 }
 
 .tab {
   padding: 7px 18px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
   cursor: pointer;
   background: var(--fc-surface);
   color: var(--fc-neutral);
@@ -276,13 +276,13 @@ onMounted(async () => {
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: var(--fc-sp-4);
 }
 
 .rc {
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
+  border-radius: var(--fc-r-md);
   overflow: hidden;
   display: block;
 }
@@ -296,18 +296,18 @@ onMounted(async () => {
 }
 
 .body {
-  padding: 12px 14px;
+  padding: var(--fc-sp-3) var(--fc-sp-3-5);
 }
 
 .body h3 {
-  margin: 0 0 6px;
-  font-size: 16px;
+  margin: 0 0 var(--fc-sp-1-5);
+  font-size: var(--fc-fs-lg);
   line-height: 1.4;
 }
 
 .meta2 {
   color: var(--fc-neutral);
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
 }
 
 .pager {
@@ -317,18 +317,18 @@ onMounted(async () => {
 
 .sv-cover {
   height: 220px;
-  border-radius: 10px;
+  border-radius: var(--fc-r-sm-md);
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: var(--fc-sp-3);
 }
 
 .sv-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: var(--fc-sp-3-5);
   color: var(--fc-neutral);
-  font-size: 13px;
-  margin-bottom: 10px;
+  font-size: var(--fc-fs-sm);
+  margin-bottom: var(--fc-sp-2-5);
 }
 
 @media (max-width: 800px) {

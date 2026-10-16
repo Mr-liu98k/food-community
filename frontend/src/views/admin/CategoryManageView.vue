@@ -117,8 +117,8 @@ onMounted(() => load(1))
 .toolbar {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: var(--fc-sp-3);
+  margin-bottom: var(--fc-sp-3-5);
 }
 
 .search {
@@ -126,13 +126,13 @@ onMounted(() => load(1))
 }
 
 .pager {
-  margin-top: 16px;
+  margin-top: var(--fc-sp-4);
   justify-content: flex-end;
 }
 
 .hint {
-  margin-left: 10px;
-  color: #999;
-  font-size: 12px;
+  margin-left: var(--fc-sp-2-5);
+  color: var(--fc-neutral);
+  font-size: var(--fc-fs-xs);
 }
 </style>

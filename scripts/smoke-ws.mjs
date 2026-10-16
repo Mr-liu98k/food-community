@@ -1,6 +1,24 @@
 // M5 WebSocket 冒烟：双用户 A/B 实时互发 + 未读 + 已读（Node 22 内置 fetch/WebSocket）
-const BASE = 'http://localhost:8080/api'
-const WS = 'ws://localhost:8080/api/ws/chat'
+// 端口解析：优先 BACKEND_PORT → 读 backend/.env 的 SERVER_PORT → 8080
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
+
+function resolvePort() {
+  if (process.env.BACKEND_PORT) return process.env.BACKEND_PORT
+  try {
+    const envPath = join(dirname(fileURLToPath(import.meta.url)), '..', 'backend', '.env')
+    for (const line of readFileSync(envPath, 'utf8').split(/\r?\n/)) {
+      const m = line.match(/^\s*SERVER_PORT\s*=\s*(.+?)\s*$/)
+      if (m) return m[1]
+    }
+  } catch { /* .env 不存在则走默认值 */ }
+  return '8080'
+}
+
+const PORT = resolvePort()
+const BASE = `http://localhost:${PORT}/api`
+const WS = `ws://localhost:${PORT}/api/ws/chat`
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 const stamp = Date.now()

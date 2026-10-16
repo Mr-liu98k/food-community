@@ -2,3 +2,8 @@
 backend/uploads/
 .DS_Store
 *.log
+
+# 本地数据库备份（含用户数据，严禁入库）
+_backup_before_fix.sql
+# 验收脚本下载的临时图片缓存
+scripts/.imgcache/

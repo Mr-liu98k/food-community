@@ -68,35 +68,35 @@ onMounted(() => load(1))
 
 <style scoped>
 .notice-page {
-  max-width: 760px;
+  max-width: var(--fc-page-narrow);
   margin: 0 auto;
 }
 
 .head h1 {
-  margin: 0 0 4px;
-  font-size: 28px;
+  margin: 0 0 var(--fc-sp-1);
+  font-size: var(--fc-fs-2xl);
 }
 
 .head p {
-  margin: 0 0 16px;
+  margin: 0 0 var(--fc-sp-4);
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
+  gap: var(--fc-sp-3-5);
+  padding: var(--fc-sp-4) 18px;
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
+  border-radius: var(--fc-r-md);
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -106,7 +106,7 @@ onMounted(() => load(1))
 }
 
 .dot {
-  font-size: 20px;
+  font-size: var(--fc-fs-xl);
 }
 
 .mid {
@@ -115,20 +115,20 @@ onMounted(() => load(1))
 }
 
 .mid b {
-  font-size: 15px;
+  font-size: var(--fc-fs-md);
 }
 
 .summary {
-  margin: 4px 0 0;
+  margin: var(--fc-sp-1) 0 0;
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .time {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
   flex-shrink: 0;
 }
@@ -140,7 +140,7 @@ onMounted(() => load(1))
 
 .meta-line {
   color: var(--fc-neutral);
-  font-size: 12px;
-  margin-bottom: 10px;
+  font-size: var(--fc-fs-xs);
+  margin-bottom: var(--fc-sp-2-5);
 }
 </style>

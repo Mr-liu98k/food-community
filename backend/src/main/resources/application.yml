@@ -1,5 +1,7 @@
 server:
-  port: 8080
+  # 端口统一由 backend/.env 的 SERVER_PORT 控制（默认 8080）。
+  # 本机 8080 常被其他项目占用，改 .env 即可，无需再手工加 --server.port。
+  port: ${SERVER_PORT:8080}
 
 spring:
   application:

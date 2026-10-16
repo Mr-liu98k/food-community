@@ -102,83 +102,145 @@ onUnmounted(() => unreadTimer && clearInterval(unreadTimer))
 }
 
 .user-header {
-  height: 60px;
+  height: 64px;
   padding: 0;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  background: color-mix(in oklab, var(--fc-surface-2) 88%, transparent);
+  backdrop-filter: saturate(1.6) blur(12px);
+  border-bottom: 1px solid var(--fc-rule);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: var(--fc-z-header);
 }
 
 .header-inner {
-  max-width: 1100px;
+  max-width: var(--fc-container);
   height: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 0 16px;
+  gap: var(--fc-sp-8);
+  padding: 0 var(--fc-sp-4);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--fc-primary);
-  font-size: 20px;
+  gap: var(--fc-sp-2);
+  color: var(--fc-accent);
+  font-size: var(--fc-fs-xl);
   font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .nav {
   flex: 1;
   display: flex;
-  gap: 20px;
+  gap: var(--fc-sp-5);
 }
 
+/* 导航项：底部指示条，比单纯变色更有层级感 */
 .nav-item {
-  color: #606266;
-  font-size: 15px;
+  position: relative;
+  padding: var(--fc-sp-1) 0;
+  color: var(--fc-muted);
+  font-size: var(--fc-fs-md);
+  transition: color var(--fc-dur-fast) var(--fc-ease-standard);
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: var(--fc-r-full);
+  background: var(--fc-accent);
+  transform: scaleX(0);
+  transition: transform var(--fc-dur-base) var(--fc-ease-standard);
+}
+
+.nav-item:hover {
+  color: var(--fc-ink);
 }
 
 .nav-item.router-link-active {
-  color: var(--fc-primary);
+  color: var(--fc-accent);
   font-weight: 600;
+}
+
+.nav-item.router-link-active::after {
+  transform: scaleX(1);
 }
 
 .write-btn {
   --el-button-bg-color: var(--fc-accent);
   --el-button-border-color: var(--fc-accent);
-  --el-button-hover-bg-color: var(--fc-accent);
-  --el-button-hover-border-color: var(--fc-accent);
+  --el-button-hover-bg-color: var(--fc-accent-hover);
+  --el-button-hover-border-color: var(--fc-accent-hover);
+  --el-button-active-bg-color: var(--fc-accent-hover);
+  --el-button-active-border-color: var(--fc-accent-hover);
   font-weight: 600;
+  box-shadow: var(--fc-sh-xs);
 }
 
 .user-entry {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--fc-sp-2);
   cursor: pointer;
   outline: none;
+  padding: var(--fc-sp-1) var(--fc-sp-2);
+  border-radius: var(--fc-r-full);
+  transition: background var(--fc-dur-fast) var(--fc-ease-standard);
+}
+
+.user-entry:hover {
+  background: var(--fc-surface);
 }
 
 .nickname {
-  font-size: 14px;
-  color: #303133;
+  font-size: var(--fc-fs-base);
+  color: var(--fc-ink);
+  max-width: 8em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .user-main {
-  max-width: 1100px;
+  max-width: var(--fc-container);
   width: 100%;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: var(--fc-sp-6) var(--fc-sp-4) var(--fc-sp-12);
 }
 
 .chat-entry {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--fc-sp-4);
   min-width: 120px;
+}
+
+/* 窄屏：导航可横向滚动，避免换行挤压 */
+@media (max-width: 860px) {
+  .header-inner {
+    gap: var(--fc-sp-4);
+  }
+
+  .nav {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nickname {
+    display: none;
+  }
 }
 </style>

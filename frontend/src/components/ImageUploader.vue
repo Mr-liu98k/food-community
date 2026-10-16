@@ -57,7 +57,7 @@ function remove() {
   position: relative;
   width: 160px;
   height: 120px;
-  border-radius: 8px;
+  border-radius: var(--fc-r-sm);
   overflow: hidden;
   border: 1px solid var(--fc-rule);
 }
@@ -78,7 +78,7 @@ function remove() {
   opacity: 0;
   transition: opacity 0.2s;
   color: #fff;
-  font-size: 20px;
+  font-size: var(--fc-fs-xl);
   cursor: pointer;
 }
 
@@ -90,14 +90,14 @@ function remove() {
   width: 160px;
   height: 120px;
   border: 1px dashed var(--fc-rule);
-  border-radius: 8px;
+  border-radius: var(--fc-r-sm);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--fc-sp-1-5);
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
   background: var(--fc-paper);
   cursor: pointer;
 }

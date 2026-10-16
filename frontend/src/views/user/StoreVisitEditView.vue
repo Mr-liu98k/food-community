@@ -87,13 +87,13 @@ async function submit() {
 
 <style scoped>
 .sv-edit {
-  max-width: 720px;
+  max-width: var(--fc-page-narrow);
   margin: 0 auto;
 }
 
 .page-title h1 {
-  margin: 0 0 6px;
-  font-size: 30px;
+  margin: 0 0 var(--fc-sp-1-5);
+  font-size: var(--fc-fs-2xl);
 }
 
 .page-title p {
@@ -104,13 +104,13 @@ async function submit() {
 .card {
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
+  border-radius: var(--fc-r-md);
   padding: 22px;
 }
 
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  gap: var(--fc-sp-3);
 }
 </style>

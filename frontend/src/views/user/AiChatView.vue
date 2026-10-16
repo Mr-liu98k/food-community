@@ -135,14 +135,14 @@ function clear() {
 
 <style scoped>
 .ai-page {
-  max-width: 860px;
+  max-width: var(--fc-page-narrow);
   margin: 0 auto;
 }
 
 .ai-shell {
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 16px;
+  border-radius: var(--fc-r-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -156,7 +156,7 @@ function clear() {
   padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--fc-sp-3-5);
   background: var(--fc-paper);
 }
 
@@ -166,39 +166,39 @@ function clear() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: var(--fc-sp-2);
 }
 
 .logo {
-  font-size: 52px;
+  font-size: var(--fc-fs-4xl);
 }
 
 .welcome h1 {
-  margin: 4px 0 0;
-  font-size: 26px;
+  margin: var(--fc-sp-1) 0 0;
+  font-size: var(--fc-fs-2xl);
 }
 
 .welcome p {
   color: var(--fc-neutral);
   margin: 0;
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--fc-sp-2);
   justify-content: center;
-  margin-top: 10px;
+  margin-top: var(--fc-sp-2-5);
   max-width: 560px;
 }
 
 .chip {
-  padding: 7px 14px;
+  padding: 7px var(--fc-sp-3-5);
   background: var(--fc-surface);
   border: 1px solid var(--fc-rule);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
   cursor: pointer;
   color: var(--fc-ink);
   transition: all 0.15s;
@@ -211,7 +211,7 @@ function clear() {
 
 .msg {
   display: flex;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
   max-width: 78%;
 }
 
@@ -228,15 +228,15 @@ function clear() {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 17px;
+  font-size: var(--fc-fs-lg);
   flex-shrink: 0;
 }
 
 .bubble {
-  padding: 10px 14px;
-  border-radius: 14px;
+  padding: var(--fc-sp-2-5) var(--fc-sp-3-5);
+  border-radius: var(--fc-r-md-lg);
   line-height: 1.7;
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
   word-break: break-word;
   min-width: 40px;
 }
@@ -257,7 +257,7 @@ function clear() {
   margin: 0;
   white-space: pre-wrap;
   font-family: inherit;
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
 }
 
 .cursor {
@@ -272,14 +272,14 @@ function clear() {
 }
 
 .error {
-  color: #d43d2a;
-  font-size: 13px;
+  color: var(--fc-danger);
+  font-size: var(--fc-fs-sm);
   text-align: center;
 }
 
 .composer {
   border-top: 1px solid var(--fc-rule);
-  padding: 12px 16px 14px;
+  padding: var(--fc-sp-3) var(--fc-sp-4) var(--fc-sp-3-5);
   background: oklch(99% 0.006 70);
 }
 
@@ -287,17 +287,17 @@ function clear() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
+  margin-top: var(--fc-sp-2);
 }
 
 .tip {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--fc-sp-1-5);
 }
 </style>

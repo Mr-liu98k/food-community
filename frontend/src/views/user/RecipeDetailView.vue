@@ -168,9 +168,10 @@ function goAuthor() {
 <style scoped>
 .back {
   display: inline-block;
-  margin-bottom: 14px;
+  margin-bottom: var(--fc-sp-3);
   color: var(--fc-neutral);
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
+  transition: color var(--fc-dur-fast) var(--fc-ease-standard);
 }
 
 .back:hover {
@@ -180,9 +181,10 @@ function goAuthor() {
 .hero {
   position: relative;
   height: 320px;
-  border-radius: 16px;
+  border-radius: var(--fc-r-lg);
   overflow: hidden;
-  margin-bottom: 22px;
+  margin-bottom: var(--fc-sp-5);
+  box-shadow: var(--fc-sh-sm);
 }
 
 .hero-shade {
@@ -191,31 +193,32 @@ function goAuthor() {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 26px 30px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 60%);
+  padding: var(--fc-sp-6) var(--fc-sp-8);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 62%);
 }
 
 .cat-tag {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--fc-accent);
-  font-size: 12px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  margin-bottom: 8px;
+  font-size: var(--fc-fs-xs);
+  font-weight: 600;
+  padding: 3px var(--fc-sp-3);
+  border-radius: var(--fc-r-full);
+  margin-bottom: var(--fc-sp-2);
 }
 
 .hero h1 {
   margin: 0;
   color: #fff;
-  font-size: 34px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-size: var(--fc-fs-3xl);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 .layout {
   display: grid;
   grid-template-columns: 1fr 260px;
-  gap: 22px;
+  gap: var(--fc-sp-5);
   align-items: start;
 }
 
@@ -223,13 +226,14 @@ function goAuthor() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--fc-sp-4);
+  gap: var(--fc-sp-4);
 }
 
 .author {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--fc-sp-3);
   cursor: pointer;
 }
 
@@ -239,31 +243,33 @@ function goAuthor() {
 }
 
 .who b {
-  font-size: 15px;
+  font-size: var(--fc-fs-md);
 }
 
 .who i {
   font-style: normal;
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
 }
 
 .nums {
   display: flex;
-  gap: 10px;
+  gap: var(--fc-sp-2);
   color: var(--fc-neutral);
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
 }
 
 .nums button {
   border: 1px solid var(--fc-rule);
-  background: oklch(99% 0.006 70);
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 13px;
+  background: var(--fc-surface-2);
+  border-radius: var(--fc-r-full);
+  padding: var(--fc-sp-1) var(--fc-sp-4);
+  font-size: var(--fc-fs-sm);
   cursor: pointer;
   color: var(--fc-ink);
-  transition: all 0.2s;
+  transition: border-color var(--fc-dur-fast) var(--fc-ease-standard),
+              background var(--fc-dur-fast) var(--fc-ease-standard),
+              color var(--fc-dur-fast) var(--fc-ease-standard);
 }
 
 .nums button:hover {
@@ -276,22 +282,24 @@ function goAuthor() {
   color: var(--fc-accent);
 }
 
+/* 收藏态：原先用 #d4a017/#b8860b 金色（调色板外的散色），统一到 warning 语义色 */
 .fav-btn.on {
-  border-color: #d4a017;
-  color: #b8860b;
+  background: var(--fc-warning-soft);
+  border-color: var(--fc-warning);
+  color: var(--fc-warning);
 }
 
 .card {
-  background: oklch(99% 0.006 70);
+  background: var(--fc-surface-2);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
-  padding: 20px 22px;
-  margin-bottom: 16px;
+  border-radius: var(--fc-r-md);
+  padding: var(--fc-sp-5) var(--fc-sp-6);
+  margin-bottom: var(--fc-sp-4);
 }
 
 .card h2 {
-  margin: 0 0 12px;
-  font-size: 19px;
+  margin: 0 0 var(--fc-sp-3);
+  font-size: var(--fc-fs-xl);
 }
 
 .ings {
@@ -305,9 +313,9 @@ function goAuthor() {
 .ings li {
   display: flex;
   justify-content: space-between;
-  padding: 9px 2px;
+  padding: var(--fc-sp-2) var(--fc-sp-0-5);
   border-bottom: 1px dashed var(--fc-rule);
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
 }
 
 .ings li:last-child {
@@ -332,8 +340,8 @@ function goAuthor() {
 
 .step {
   display: flex;
-  gap: 14px;
-  padding: 14px 0;
+  gap: var(--fc-sp-4);
+  padding: var(--fc-sp-4) 0;
   border-bottom: 1px solid var(--fc-rule);
 }
 
@@ -345,39 +353,41 @@ function goAuthor() {
   flex-shrink: 0;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: var(--fc-r-full);
   background: var(--fc-ink);
-  color: oklch(97% 0.012 70);
+  color: var(--fc-ink-invert);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
   font-weight: 700;
 }
 
 .step-text {
   flex: 1;
+  line-height: var(--fc-lh-relaxed);
 }
 
 .side {
   position: sticky;
-  top: 76px;
+  top: 84px;
 }
 
 .author-card {
   background: var(--fc-surface);
-  border-radius: 12px;
-  padding: 24px 20px;
+  border-radius: var(--fc-r-md);
+  padding: var(--fc-sp-6) var(--fc-sp-5);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: var(--fc-sp-2);
   text-align: center;
 }
 
 .author-card .name {
   cursor: pointer;
-  font-size: 17px;
+  font-size: var(--fc-fs-lg);
+  transition: color var(--fc-dur-fast) var(--fc-ease-standard);
 }
 
 .author-card .name:hover {
@@ -386,9 +396,9 @@ function goAuthor() {
 
 .intro {
   color: var(--fc-neutral);
-  font-size: 13px;
-  line-height: 1.6;
-  margin: 0 0 8px;
+  font-size: var(--fc-fs-sm);
+  line-height: var(--fc-lh-normal);
+  margin: 0 0 var(--fc-sp-2);
 }
 
 @media (max-width: 900px) {
@@ -398,6 +408,18 @@ function goAuthor() {
 
   .side {
     position: static;
+  }
+
+  .hero {
+    height: 220px;
+  }
+
+  .hero-shade {
+    padding: var(--fc-sp-5);
+  }
+
+  .hero h1 {
+    font-size: var(--fc-fs-2xl);
   }
 }
 </style>

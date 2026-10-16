@@ -94,13 +94,13 @@ onMounted(() => load(1))
 
 <style scoped>
 .sv-page {
-  max-width: 1000px;
+  max-width: var(--fc-page);
   margin: 0 auto;
 }
 
 .page-title h1 {
-  margin: 0 0 6px;
-  font-size: 30px;
+  margin: 0 0 var(--fc-sp-1-5);
+  font-size: var(--fc-fs-2xl);
 }
 
 .page-title p {
@@ -111,7 +111,7 @@ onMounted(() => load(1))
 .toolbar {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 16px;
+  margin-bottom: var(--fc-sp-4);
 }
 
 .search {
@@ -121,13 +121,13 @@ onMounted(() => load(1))
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: var(--fc-sp-4);
 }
 
 .sv-card {
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
+  border-radius: var(--fc-r-md);
   overflow: hidden;
   cursor: pointer;
 }
@@ -137,12 +137,12 @@ onMounted(() => load(1))
 }
 
 .body {
-  padding: 12px 14px;
+  padding: var(--fc-sp-3) var(--fc-sp-3-5);
 }
 
 .body h3 {
-  margin: 0 0 8px;
-  font-size: 16px;
+  margin: 0 0 var(--fc-sp-2);
+  font-size: var(--fc-fs-lg);
   line-height: 1.4;
 }
 
@@ -155,13 +155,13 @@ onMounted(() => load(1))
 .author {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
+  gap: var(--fc-sp-1-5);
+  font-size: var(--fc-fs-sm);
   color: var(--fc-neutral);
 }
 
 .views {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-muted);
 }
 
@@ -172,23 +172,23 @@ onMounted(() => load(1))
 
 .cover {
   height: 230px;
-  border-radius: 10px;
+  border-radius: var(--fc-r-sm-md);
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: var(--fc-sp-3);
 }
 
 .byline {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: var(--fc-sp-3);
 }
 
 .author-link {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  gap: var(--fc-sp-1-5);
+  font-size: var(--fc-fs-base);
   color: var(--fc-ink);
 }
 
@@ -198,7 +198,7 @@ onMounted(() => load(1))
 
 .addr {
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
 }
 
 @media (max-width: 800px) {

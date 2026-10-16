@@ -68,41 +68,41 @@ onUnmounted(() => timer && clearInterval(timer))
 
 <style scoped>
 .chat-list-page {
-  max-width: 640px;
+  max-width: var(--fc-page-narrow);
   margin: 0 auto;
 }
 
 .head {
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: var(--fc-sp-3);
+  margin-bottom: var(--fc-sp-3-5);
 }
 
 .head h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: var(--fc-fs-2xl);
 }
 
 .sub {
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--fc-sp-1);
 }
 
 .conv {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
+  gap: var(--fc-sp-3-5);
+  padding: var(--fc-sp-3-5) var(--fc-sp-4);
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
+  border-radius: var(--fc-r-md);
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -118,20 +118,20 @@ onUnmounted(() => timer && clearInterval(timer))
 }
 
 .mid b {
-  font-size: 15px;
+  font-size: var(--fc-fs-md);
 }
 
 .last {
   margin: 3px 0 0;
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .time {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
   flex-shrink: 0;
 }

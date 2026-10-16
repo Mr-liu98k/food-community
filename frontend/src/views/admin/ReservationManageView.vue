@@ -76,7 +76,7 @@ onMounted(() => load(1))
 .toolbar {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 14px;
+  margin-bottom: var(--fc-sp-3-5);
 }
 
 .search {
@@ -84,7 +84,7 @@ onMounted(() => load(1))
 }
 
 .pager {
-  margin-top: 16px;
+  margin-top: var(--fc-sp-4);
   justify-content: flex-end;
 }
 </style>

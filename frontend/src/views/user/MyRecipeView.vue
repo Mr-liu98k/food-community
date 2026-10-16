@@ -110,7 +110,7 @@ onMounted(() => load(1))
 
 <style scoped>
 .my-recipe-page {
-  max-width: 900px;
+  max-width: var(--fc-page);
   margin: 0 auto;
 }
 
@@ -122,26 +122,26 @@ onMounted(() => load(1))
 }
 
 .head h1 {
-  margin: 0 0 4px;
-  font-size: 28px;
+  margin: 0 0 var(--fc-sp-1);
+  font-size: var(--fc-fs-2xl);
 }
 
 .head p {
   margin: 0;
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
 }
 
 .tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: var(--fc-sp-2);
+  margin-bottom: var(--fc-sp-3-5);
 }
 
 .tab {
-  padding: 6px 14px;
+  padding: var(--fc-sp-1-5) var(--fc-sp-3-5);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
   cursor: pointer;
   color: var(--fc-neutral);
   background: var(--fc-surface);
@@ -155,19 +155,19 @@ onMounted(() => load(1))
 .t-title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .mini-cover {
   width: 56px;
   height: 40px;
-  border-radius: 6px;
+  border-radius: var(--fc-r-xs);
   overflow: hidden;
   flex-shrink: 0;
 }
 
 .pager {
-  margin-top: 20px;
+  margin-top: var(--fc-sp-5);
   justify-content: center;
 }
 </style>

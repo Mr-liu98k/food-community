@@ -119,14 +119,14 @@ async function savePassword() {
 
 <style scoped>
 .profile-page {
-  max-width: 640px;
+  max-width: var(--fc-page-narrow);
   margin: 0 auto;
 }
 
 .card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .form-box {
@@ -136,7 +136,7 @@ async function savePassword() {
 .avatar-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--fc-sp-3);
   width: 100%;
 }
 </style>

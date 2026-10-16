@@ -50,41 +50,41 @@ onMounted(async () => {
 
 <style scoped>
 .expert-page {
-  max-width: 760px;
+  max-width: var(--fc-page-narrow);
   margin: 0 auto;
 }
 
 .page-title h1 {
-  margin: 0 0 6px;
-  font-size: 30px;
+  margin: 0 0 var(--fc-sp-1-5);
+  font-size: var(--fc-fs-2xl);
 }
 
 .page-title p {
   color: var(--fc-neutral);
-  margin: 0 0 20px;
+  margin: 0 0 var(--fc-sp-5);
 }
 
 .rank-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--fc-sp-3);
 }
 
 .rank-card {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--fc-sp-4);
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 14px;
-  padding: 18px 20px;
+  border-radius: var(--fc-r-md-lg);
+  padding: 18px var(--fc-sp-5);
 }
 
 .rank-no {
   width: 30px;
   text-align: center;
   font-family: var(--fc-font-display);
-  font-size: 20px;
+  font-size: var(--fc-fs-xl);
   font-weight: 700;
   color: var(--fc-neutral);
 }
@@ -100,7 +100,7 @@ onMounted(async () => {
 }
 
 .name {
-  font-size: 17px;
+  font-size: var(--fc-fs-lg);
 }
 
 .info:hover .name {
@@ -108,9 +108,9 @@ onMounted(async () => {
 }
 
 .intro {
-  margin: 4px 0 0;
+  margin: var(--fc-sp-1) 0 0;
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -124,13 +124,13 @@ onMounted(async () => {
 
 .heat-num {
   font-family: var(--fc-font-display);
-  font-size: 22px;
+  font-size: var(--fc-fs-xl);
   font-weight: 700;
   color: var(--fc-accent);
 }
 
 .heat-label {
-  font-size: 11px;
+  font-size: var(--fc-fs-2xs);
   color: var(--fc-neutral);
 }
 </style>

@@ -189,7 +189,7 @@ onMounted(() => load(1))
 .toolbar {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: var(--fc-sp-3-5);
 }
 
 .search {
@@ -199,16 +199,16 @@ onMounted(() => load(1))
 .who {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .acc {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
 }
 
 .pager {
-  margin-top: 16px;
+  margin-top: var(--fc-sp-4);
   justify-content: flex-end;
 }
 </style>

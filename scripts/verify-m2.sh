@@ -2,7 +2,9 @@
 # M2 验收脚本：楼中楼评论 / 点赞 / 收藏 / 轮播图
 # 用法：bash scripts/verify-m2.sh
 set -u
-BASE=http://localhost:8080/api
+ENV_FILE="$(dirname "$0")/../backend/.env"
+ENV_PORT=$(grep -E '^SERVER_PORT=' "$ENV_FILE" 2>/dev/null | cut -d= -f2 | tr -d '[:space:]')
+BASE=http://localhost:${BACKEND_PORT:-${ENV_PORT:-8080}}/api
 if command -v python >/dev/null 2>&1; then PY=python; elif command -v python3 >/dev/null 2>&1; then PY=python3; else PY=node; fi
 json() { $PY -c "import sys,json;print(json.load(sys.stdin)$1)"; }
 

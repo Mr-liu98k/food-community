@@ -2,7 +2,9 @@
 # M5 验收脚本（公告模块闭环）：admin 增改查删 + 前台可见性
 # WebSocket 实时聊天请另跑：node scripts/smoke-ws.mjs（8 项自检）
 set -u
-BASE=http://localhost:8080/api
+ENV_FILE="$(dirname "$0")/../backend/.env"
+ENV_PORT=$(grep -E '^SERVER_PORT=' "$ENV_FILE" 2>/dev/null | cut -d= -f2 | tr -d '[:space:]')
+BASE=http://localhost:${BACKEND_PORT:-${ENV_PORT:-8080}}/api
 ROOT="$(dirname "$0")/.."
 if command -v python >/dev/null 2>&1; then PY=python; elif command -v python3 >/dev/null 2>&1; then PY=python3; else PY=node; fi
 json() { $PY -c "import sys,json;print(json.load(sys.stdin)$1)"; }

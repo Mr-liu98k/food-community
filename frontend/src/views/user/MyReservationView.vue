@@ -105,7 +105,7 @@ onMounted(() => load(1))
 
 <style scoped>
 .rsv-page {
-  max-width: 760px;
+  max-width: var(--fc-page-narrow);
   margin: 0 auto;
 }
 
@@ -113,23 +113,23 @@ onMounted(() => load(1))
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--fc-sp-4);
 }
 
 .head h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: var(--fc-fs-2xl);
 }
 
 .tabs {
   display: flex;
-  gap: 8px;
+  gap: var(--fc-sp-2);
 }
 
 .tab {
   padding: 7px 18px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
   cursor: pointer;
   background: var(--fc-surface);
   color: var(--fc-neutral);
@@ -143,15 +143,15 @@ onMounted(() => load(1))
 .list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--fc-sp-3-5);
 }
 
 .rsv-card {
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
   border-left: 4px solid var(--fc-rule);
-  border-radius: 12px;
-  padding: 18px 20px;
+  border-radius: var(--fc-r-md);
+  padding: 18px var(--fc-sp-5);
 }
 
 .rsv-card.st-1 {
@@ -159,7 +159,7 @@ onMounted(() => load(1))
 }
 
 .rsv-card.st-2 {
-  border-left-color: #d43d2a;
+  border-left-color: var(--fc-danger);
 }
 
 .top {
@@ -170,39 +170,39 @@ onMounted(() => load(1))
 
 .store {
   font-family: var(--fc-font-display);
-  font-size: 19px;
+  font-size: var(--fc-fs-xl);
   font-weight: 700;
 }
 
 .intro {
   color: var(--fc-neutral);
-  margin: 8px 0;
-  font-size: 14px;
+  margin: var(--fc-sp-2) 0;
+  font-size: var(--fc-fs-base);
 }
 
 .info {
   list-style: none;
   padding: 0;
-  margin: 0 0 10px;
+  margin: 0 0 var(--fc-sp-2-5);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--fc-sp-1);
   color: var(--fc-muted);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
 }
 
 .parties {
   display: flex;
-  gap: 20px;
-  padding-top: 10px;
+  gap: var(--fc-sp-5);
+  padding-top: var(--fc-sp-2-5);
   border-top: 1px dashed var(--fc-rule);
 }
 
 .who {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
+  gap: var(--fc-sp-1-5);
+  font-size: var(--fc-fs-sm);
   color: var(--fc-ink);
 }
 
@@ -210,24 +210,24 @@ onMounted(() => load(1))
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: var(--fc-sp-2-5);
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--fc-sp-2);
 }
 
 .time {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
 }
 
 .reason {
-  font-size: 12px;
-  color: #d43d2a;
+  font-size: var(--fc-fs-xs);
+  color: var(--fc-danger);
 }
 
 .ops {
   display: flex;
-  gap: 8px;
+  gap: var(--fc-sp-2);
 }
 
 .pager {

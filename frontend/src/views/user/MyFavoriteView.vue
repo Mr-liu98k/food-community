@@ -69,7 +69,7 @@ onMounted(() => load(1))
 
 <style scoped>
 .fav-page {
-  max-width: 920px;
+  max-width: var(--fc-page);
   margin: 0 auto;
 }
 
@@ -81,26 +81,26 @@ onMounted(() => load(1))
 }
 
 .head h1 {
-  margin: 0 0 4px;
-  font-size: 28px;
+  margin: 0 0 var(--fc-sp-1);
+  font-size: var(--fc-fs-2xl);
 }
 
 .head p {
   margin: 0;
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: var(--fc-sp-4);
 }
 
 .fc {
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
+  border-radius: var(--fc-r-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -115,29 +115,29 @@ onMounted(() => load(1))
 }
 
 .body {
-  padding: 12px 14px 4px;
+  padding: var(--fc-sp-3) var(--fc-sp-3-5) var(--fc-sp-1);
 }
 
 .body h3 {
-  margin: 0 0 6px;
-  font-size: 16px;
+  margin: 0 0 var(--fc-sp-1-5);
+  font-size: var(--fc-fs-lg);
 }
 
 .meta {
   color: var(--fc-neutral);
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
 }
 
 .foot {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 12px 10px;
+  padding: var(--fc-sp-1) var(--fc-sp-3) var(--fc-sp-2-5);
 }
 
 .views {
   color: var(--fc-muted);
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
 }
 
 .pager {

@@ -157,13 +157,13 @@ onMounted(async () => {
 
 <style scoped>
 .edit-page {
-  max-width: 760px;
+  max-width: var(--fc-page-narrow);
   margin: 0 auto;
 }
 
 .page-title h1 {
-  margin: 0 0 6px;
-  font-size: 30px;
+  margin: 0 0 var(--fc-sp-1-5);
+  font-size: var(--fc-fs-2xl);
 }
 
 .page-title p {
@@ -174,21 +174,21 @@ onMounted(async () => {
 .card {
   background: oklch(99% 0.006 70);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
-  padding: 20px 22px;
-  margin-bottom: 16px;
+  border-radius: var(--fc-r-md);
+  padding: var(--fc-sp-5) 22px;
+  margin-bottom: var(--fc-sp-4);
 }
 
 .card h2 {
-  margin: 0 0 14px;
-  font-size: 18px;
+  margin: 0 0 var(--fc-sp-3-5);
+  font-size: var(--fc-fs-xl);
 }
 
 .card-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: var(--fc-sp-2);
 }
 
 .card-head h2 {
@@ -204,14 +204,14 @@ onMounted(async () => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--fc-sp-1-5);
 }
 
 .row-line {
   display: flex;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: var(--fc-sp-2-5);
 }
 
 .w-name { flex: 1.4; }
@@ -219,9 +219,9 @@ onMounted(async () => {
 
 .step-line {
   display: flex;
-  gap: 12px;
+  gap: var(--fc-sp-3);
   align-items: flex-start;
-  margin-bottom: 10px;
+  margin-bottom: var(--fc-sp-2-5);
 }
 
 .step-no {
@@ -234,8 +234,8 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  margin-top: 2px;
+  font-size: var(--fc-fs-sm);
+  margin-top: var(--fc-sp-0-5);
 }
 
 .step-line .el-textarea { flex: 1; }
@@ -243,7 +243,7 @@ onMounted(async () => {
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 8px;
+  gap: var(--fc-sp-3);
+  margin-top: var(--fc-sp-2);
 }
 </style>

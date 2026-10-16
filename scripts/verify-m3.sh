@@ -4,7 +4,9 @@
 # 说明：脚本通过 mysql（密码读 backend/.env）把一个测试用户临时设为探店达人，
 #       以便走通"达人处理预约"的闭环，结束时会复原。
 set -u
-BASE=http://localhost:8080/api
+ENV_FILE="$(dirname "$0")/../backend/.env"
+ENV_PORT=$(grep -E '^SERVER_PORT=' "$ENV_FILE" 2>/dev/null | cut -d= -f2 | tr -d '[:space:]')
+BASE=http://localhost:${BACKEND_PORT:-${ENV_PORT:-8080}}/api
 ROOT="$(dirname "$0")/.."
 if command -v python >/dev/null 2>&1; then PY=python; elif command -v python3 >/dev/null 2>&1; then PY=python3; else PY=node; fi
 json() { $PY -c "import sys,json;print(json.load(sys.stdin)$1)"; }

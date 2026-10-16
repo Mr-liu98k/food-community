@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,7 +47,13 @@ public class FileStorageService {
         try {
             Files.createDirectories(uploadRoot);
             String filename = UUID.randomUUID().toString().replace("-", "") + "." + ext;
-            file.transferTo(uploadRoot.resolve(filename).toFile());
+            Path target = uploadRoot.resolve(filename);
+            // 用 InputStream 复制而非 file.transferTo(File)：
+            // 后者传入绝对路径的 File 时，Servlet 规范要求相对路径，
+            // 会抛 IllegalStateException（表现为「系统繁忙」）。
+            try (InputStream in = file.getInputStream()) {
+                Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+            }
             return "/uploads/" + filename;
         } catch (IOException e) {
             throw new BusinessException("图片保存失败，请重试");

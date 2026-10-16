@@ -3,7 +3,11 @@
 # 用法：bash scripts/verify-m0.sh
 # 说明：管理员密码从 backend/.env 读取；测试用户密码随机生成，避免命令行明文凭据。
 set -u
-BASE=http://localhost:8080/api
+
+# 端口：优先环境变量 BACKEND_PORT；否则读 backend/.env 的 SERVER_PORT；再否则 8080
+ENV_FILE="$(dirname "$0")/../backend/.env"
+ENV_PORT=$(grep -E '^SERVER_PORT=' "$ENV_FILE" 2>/dev/null | cut -d= -f2 | tr -d '[:space:]')
+BASE=http://localhost:${BACKEND_PORT:-${ENV_PORT:-8080}}/api
 
 # JSON 解析器
 if command -v python >/dev/null 2>&1; then PY=python; elif command -v python3 >/dev/null 2>&1; then PY=python3; else PY=node; fi

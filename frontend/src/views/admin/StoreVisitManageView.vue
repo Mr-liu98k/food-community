@@ -136,8 +136,8 @@ onMounted(() => load(1))
 <style scoped>
 .toolbar {
   display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: var(--fc-sp-2-5);
+  margin-bottom: var(--fc-sp-3-5);
 }
 
 .search {
@@ -151,38 +151,38 @@ onMounted(() => load(1))
 .t-title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .mini-cover {
   width: 52px;
   height: 38px;
-  border-radius: 6px;
+  border-radius: var(--fc-r-xs);
   overflow: hidden;
   flex-shrink: 0;
 }
 
 .pager {
-  margin-top: 16px;
+  margin-top: var(--fc-sp-4);
   justify-content: flex-end;
 }
 
 .cover {
   height: 220px;
-  border-radius: 10px;
+  border-radius: var(--fc-r-sm-md);
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: var(--fc-sp-3);
 }
 
 .meta {
   display: flex;
-  gap: 16px;
-  color: #777;
-  font-size: 13px;
-  margin-bottom: 12px;
+  gap: var(--fc-sp-4);
+  color: var(--fc-neutral);
+  font-size: var(--fc-fs-sm);
+  margin-bottom: var(--fc-sp-3);
 }
 
 .mb {
-  margin-bottom: 12px;
+  margin-bottom: var(--fc-sp-3);
 }
 </style>

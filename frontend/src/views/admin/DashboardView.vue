@@ -122,22 +122,22 @@ onBeforeUnmount(() => {
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-  margin-bottom: 16px;
+  gap: var(--fc-sp-3-5);
+  margin-bottom: var(--fc-sp-4);
 }
 
 .stat-card {
   background: #fff;
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
-  padding: 18px 16px;
+  border-radius: var(--fc-r-md);
+  padding: 18px var(--fc-sp-4);
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: var(--fc-sp-3-5);
 }
 
 .icon {
-  font-size: 30px;
+  font-size: var(--fc-fs-2xl);
 }
 
 .num-box {
@@ -147,44 +147,44 @@ onBeforeUnmount(() => {
 
 .num {
   font-family: var(--fc-font-display);
-  font-size: 26px;
+  font-size: var(--fc-fs-2xl);
   font-weight: 700;
   color: var(--fc-ink);
   line-height: 1.1;
 }
 
 .label {
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
   color: var(--fc-neutral);
 }
 
 .charts {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
-  gap: 14px;
+  gap: var(--fc-sp-3-5);
 }
 
 .chart-card {
   background: #fff;
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: var(--fc-r-md);
+  padding: var(--fc-sp-4);
 }
 
 .chart-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: var(--fc-sp-2);
 }
 
 .chart-head h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fc-fs-lg);
 }
 
 .hint {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
 }
 

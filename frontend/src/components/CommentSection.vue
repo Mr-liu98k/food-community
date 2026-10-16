@@ -133,20 +133,20 @@ onMounted(() => load(1))
 
 <style scoped>
 .comment-sec h2 {
-  margin: 0 0 16px;
-  font-size: 19px;
+  margin: 0 0 var(--fc-sp-4);
+  font-size: var(--fc-fs-xl);
 }
 
 .cnt {
   color: var(--fc-neutral);
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
   font-weight: 400;
 }
 
 .composer {
   display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: var(--fc-sp-3);
+  margin-bottom: var(--fc-sp-5);
 }
 
 .composer-main {
@@ -156,14 +156,14 @@ onMounted(() => load(1))
 .composer-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
-  margin-top: 8px;
+  gap: var(--fc-sp-2);
+  margin-top: var(--fc-sp-2);
 }
 
 .comment-item {
   display: flex;
-  gap: 12px;
-  padding: 16px 0;
+  gap: var(--fc-sp-3);
+  padding: var(--fc-sp-4) 0;
   border-top: 1px solid var(--fc-rule);
 }
 
@@ -175,32 +175,32 @@ onMounted(() => load(1))
 .head {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: var(--fc-sp-2-5);
 }
 
 .name {
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
 }
 
 .time {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
 }
 
 .text {
-  margin: 6px 0;
-  font-size: 14px;
+  margin: var(--fc-sp-1-5) 0;
+  font-size: var(--fc-fs-base);
   line-height: 1.7;
   word-break: break-word;
 }
 
 .ops {
   display: flex;
-  gap: 14px;
+  gap: var(--fc-sp-3-5);
 }
 
 .op {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
   cursor: pointer;
 }
@@ -210,20 +210,20 @@ onMounted(() => load(1))
 }
 
 .op.danger:hover {
-  color: #d43d2a;
+  color: var(--fc-danger);
 }
 
 .children {
-  margin-top: 10px;
+  margin-top: var(--fc-sp-2-5);
   background: oklch(95% 0.012 70);
-  border-radius: 8px;
-  padding: 6px 14px;
+  border-radius: var(--fc-r-sm);
+  padding: var(--fc-sp-1-5) var(--fc-sp-3-5);
 }
 
 .child {
   display: flex;
-  gap: 10px;
-  padding: 10px 0;
+  gap: var(--fc-sp-2-5);
+  padding: var(--fc-sp-2-5) 0;
   border-bottom: 1px dashed var(--fc-rule);
 }
 
@@ -239,21 +239,21 @@ onMounted(() => load(1))
 .child-head {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: var(--fc-sp-2);
   flex-wrap: wrap;
 }
 
 .child-head .name {
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
 }
 
 .reply-to {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-accent);
 }
 
 .pager {
-  margin-top: 14px;
+  margin-top: var(--fc-sp-3-5);
   justify-content: center;
 }
 </style>

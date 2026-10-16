@@ -60,7 +60,7 @@ const fallbackStyle = computed(() => ({ background: GRADIENTS[Math.abs(props.see
 }
 
 .fallback-emoji {
-  font-size: 52px;
+  font-size: var(--fc-fs-4xl);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }
 </style>

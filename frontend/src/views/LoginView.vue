@@ -2,7 +2,9 @@
   <div class="login-page">
     <div class="login-card">
       <div class="login-title">
-        <el-icon :size="34" color="#e8734a"><Food /></el-icon>
+        <div class="brand-mark">
+          <el-icon :size="30"><Food /></el-icon>
+        </div>
         <h1>美食社区</h1>
         <p>分享菜谱 · 探店打卡 · AI 美食问答</p>
       </div>
@@ -122,39 +124,104 @@ async function doRegister() {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: var(--fc-sp-6) var(--fc-sp-4);
+  position: relative;
+  overflow: hidden;
   background:
-    radial-gradient(circle at 20% 20%, rgba(232, 115, 74, 0.15), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(240, 180, 90, 0.18), transparent 40%),
-    #f7f6f3;
+    radial-gradient(circle at 15% 15%, oklch(88% 0.07 62 / 0.5), transparent 45%),
+    radial-gradient(circle at 85% 85%, oklch(90% 0.06 80 / 0.55), transparent 45%),
+    var(--fc-paper);
+}
+
+/* 背景装饰：大号食物意象，低透明度做氛围，不干扰内容 */
+.login-page::before,
+.login-page::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.login-page::before {
+  width: 420px;
+  height: 420px;
+  top: -140px;
+  right: -120px;
+  background: oklch(80% 0.1 55 / 0.22);
+}
+
+.login-page::after {
+  width: 360px;
+  height: 360px;
+  bottom: -130px;
+  left: -110px;
+  background: oklch(84% 0.09 75 / 0.22);
 }
 
 .login-card {
-  width: 420px;
-  background: #fff;
-  border-radius: 16px;
-  padding: 36px 40px 28px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 1;
+  width: min(420px, 100%);
+  background: var(--fc-surface-2);
+  border: 1px solid var(--fc-rule);
+  border-radius: var(--fc-r-lg);
+  padding: var(--fc-sp-10) var(--fc-sp-10) var(--fc-sp-6);
+  box-shadow: var(--fc-sh-lg);
 }
 
 .login-title {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--fc-sp-6);
+}
+
+/* 品牌标识：暖色渐变块，比裸图标更有识别度 */
+.brand-mark {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--fc-sp-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--fc-r-md);
+  color: #fff;
+  background: linear-gradient(135deg, oklch(72% 0.15 62), var(--fc-accent));
+  box-shadow: var(--fc-sh-accent);
 }
 
 .login-title h1 {
-  margin: 8px 0 4px;
-  font-size: 26px;
-  color: #2b2f36;
+  margin: 0 0 var(--fc-sp-1);
+  font-size: var(--fc-fs-2xl);
+  color: var(--fc-ink);
 }
 
 .login-title p {
-  margin: 0 0 12px;
-  color: #909399;
-  font-size: 13px;
+  margin: 0;
+  color: var(--fc-neutral);
+  font-size: var(--fc-fs-sm);
+  letter-spacing: 0.02em;
 }
 
 .submit-btn {
   width: 100%;
-  margin-top: 4px;
+  margin-top: var(--fc-sp-1);
+  height: 44px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* 表单与 tab 的间距节奏 */
+.login-card :deep(.el-tabs__header) {
+  margin-bottom: var(--fc-sp-6);
+}
+
+.login-card :deep(.el-form-item) {
+  margin-bottom: var(--fc-sp-5);
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: var(--fc-sp-6) var(--fc-sp-5) var(--fc-sp-4);
+  }
 }
 </style>

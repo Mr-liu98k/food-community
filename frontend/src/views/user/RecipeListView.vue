@@ -32,7 +32,7 @@
 
         <div v-loading="loading">
           <div v-if="rows.length" class="grid">
-            <router-link v-for="(r, i) in rows" :key="r.id" :to="`/recipe/${r.id}`" class="rc card-link">
+            <router-link v-for="r in rows" :key="r.id" :to="`/recipe/${r.id}`" class="rc card-link">
               <div class="thumb"><RecipeCover :src="r.cover" :title="r.title" :seed="r.id" /></div>
               <div class="body">
                 <h3>{{ r.title }}</h3>
@@ -116,82 +116,94 @@ onMounted(async () => {
 
 <style scoped>
 .page-title h1 {
-  font-size: 30px;
-  margin: 0 0 6px;
+  font-size: var(--fc-fs-2xl);
+  margin: 0 0 var(--fc-sp-1);
 }
 
 .page-title p {
   color: var(--fc-neutral);
-  margin: 0 0 20px;
+  margin: 0 0 var(--fc-sp-5);
+  font-size: var(--fc-fs-base);
 }
 
 .layout {
   display: grid;
   grid-template-columns: 180px 1fr;
-  gap: 24px;
+  gap: var(--fc-sp-6);
   align-items: start;
 }
 
+/* 分类侧栏：卡片化 + 吸顶 */
 .side {
-  background: var(--fc-surface);
-  border-radius: 12px;
-  padding: 14px;
+  background: var(--fc-surface-2);
+  border: 1px solid var(--fc-rule);
+  border-radius: var(--fc-r-md);
+  padding: var(--fc-sp-3);
   position: sticky;
-  top: 76px;
+  top: 84px;
+  box-shadow: var(--fc-sh-xs);
 }
 
 .side-title {
-  font-size: 13px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-muted);
   letter-spacing: 0.08em;
-  margin-bottom: 8px;
+  margin-bottom: var(--fc-sp-2);
+  padding-left: var(--fc-sp-2);
 }
 
 .cat-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 9px 12px;
-  border-radius: 8px;
+  padding: var(--fc-sp-2) var(--fc-sp-3);
+  border-radius: var(--fc-r-sm);
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--fc-fs-base);
   color: var(--fc-ink);
-  transition: all 0.15s;
+  transition: background var(--fc-dur-fast) var(--fc-ease-standard),
+              color var(--fc-dur-fast) var(--fc-ease-standard);
+}
+
+.cat-item + .cat-item {
+  margin-top: var(--fc-sp-0-5);
 }
 
 .cat-item:hover {
-  background: oklch(90% 0.02 60 / 0.4);
+  background: var(--fc-surface);
 }
 
 .cat-item.active {
   background: var(--fc-ink);
-  color: oklch(97% 0.012 70);
+  color: var(--fc-ink-invert);
+  font-weight: 600;
 }
 
 .tick {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
 }
 
 .toolbar {
-  margin-bottom: 16px;
+  margin-bottom: var(--fc-sp-4);
   display: flex;
   justify-content: flex-end;
 }
 
 .search {
   width: 260px;
+  max-width: 100%;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: var(--fc-sp-4);
 }
 
 .rc {
-  background: oklch(99% 0.006 70);
+  background: var(--fc-surface-2);
   border: 1px solid var(--fc-rule);
-  border-radius: 12px;
+  border-radius: var(--fc-r-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -199,42 +211,50 @@ onMounted(async () => {
 
 .thumb {
   height: 150px;
+  flex-shrink: 0;
 }
 
 .body {
-  padding: 12px 14px 14px;
+  padding: var(--fc-sp-3) var(--fc-sp-4) var(--fc-sp-4);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--fc-sp-2);
   flex: 1;
 }
 
+/* 标题最多 2 行，保证同排卡片底部信息对齐 */
 .body h3 {
   margin: 0;
-  font-size: 16px;
-  line-height: 1.4;
+  font-size: var(--fc-fs-lg);
+  line-height: var(--fc-lh-snug);
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .byline {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
+  gap: var(--fc-sp-2);
+  font-size: var(--fc-fs-sm);
   color: var(--fc-neutral);
 }
 
 .tags {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  align-items: center;
+  font-size: var(--fc-fs-xs);
 }
 
 .tag {
   color: var(--fc-accent);
   background: var(--fc-accent-soft);
-  padding: 2px 8px;
-  border-radius: 999px;
+  padding: var(--fc-sp-0-5) var(--fc-sp-2);
+  border-radius: var(--fc-r-full);
+  font-weight: 500;
 }
 
 .view {
@@ -242,7 +262,7 @@ onMounted(async () => {
 }
 
 .pager {
-  margin-top: 24px;
+  margin-top: var(--fc-sp-6);
   justify-content: center;
 }
 

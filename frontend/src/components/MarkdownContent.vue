@@ -21,7 +21,7 @@ const html = computed(() => (props.content ? md.render(props.content) : ''))
 
 <style scoped>
 .md-content {
-  font-size: 15px;
+  font-size: var(--fc-fs-md);
   line-height: 1.8;
   word-break: break-word;
 }
@@ -45,7 +45,7 @@ const html = computed(() => (props.content ? md.render(props.content) : ''))
 .md-content :deep(code) {
   background: oklch(92% 0.015 70);
   padding: 0.1em 0.4em;
-  border-radius: 4px;
+  border-radius: var(--fc-r-2xs);
   font-size: 0.92em;
 }
 

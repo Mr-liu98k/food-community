@@ -68,23 +68,23 @@ onMounted(() => load(1))
 
 <style scoped>
 .my-comment-page {
-  max-width: 900px;
+  max-width: var(--fc-page);
   margin: 0 auto;
 }
 
 .head {
-  margin-bottom: 16px;
+  margin-bottom: var(--fc-sp-4);
 }
 
 .head h1 {
-  margin: 0 0 4px;
-  font-size: 28px;
+  margin: 0 0 var(--fc-sp-1);
+  font-size: var(--fc-fs-2xl);
 }
 
 .head p {
   margin: 0;
   color: var(--fc-neutral);
-  font-size: 13px;
+  font-size: var(--fc-fs-sm);
 }
 
 .content {
@@ -93,9 +93,9 @@ onMounted(() => load(1))
 }
 
 .reply-flag {
-  font-size: 12px;
+  font-size: var(--fc-fs-xs);
   color: var(--fc-neutral);
-  margin-top: 2px;
+  margin-top: var(--fc-sp-0-5);
 }
 
 .r-link {
